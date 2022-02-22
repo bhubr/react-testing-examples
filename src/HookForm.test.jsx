@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, act } from '@testing-library/react';
 import HookForm from './HookForm';
 
 test('Form renders', () => {
@@ -9,7 +9,10 @@ test('Form renders', () => {
 });
 
 test('Form can be submitted', async () => {
-  const mockSubmit = jest.fn();
+  // mockSubmit is called wit TWO args: data (hook form data) and event (React SyntheticEvent)
+  // this is a workaround to avoid passing the synthetic event to the mocked function
+  const mockSubmitOneArg = jest.fn()
+  const mockSubmit = jest.fn(a => mockSubmitOneArg(a));
   render(<HookForm onSubmit={mockSubmit} />);
 
   const emailInput = screen.getByLabelText('Email (*)');
@@ -39,18 +42,18 @@ test('Form can be submitted', async () => {
   const rememberMeInput = screen.getByLabelText('Remember me');
   fireEvent.click(rememberMeInput);
 
-  const submitBtn = screen.getByTestId('form');
-  fireEvent.submit(submitBtn);
+  const submitBtn = screen.getByText('Send');
+  fireEvent.click(submitBtn);
 
-  // await waitFor(() =>
-  expect(mockSubmit).toHaveBeenCalledWith({
-    email: 'homer@simpsons.net',
-    password: 'Donut666',
-    bio: "D'oh!",
-    pictureUrl,
-    country: 'US',
-    diet: 'omnivore',
-    rememberMe: true,
-  })
-  // );
+  await waitFor(() =>
+    expect(mockSubmitOneArg).toHaveBeenCalledWith({
+      email: 'homer@simpsons.net',
+      password: 'Donut666',
+      bio: "D'oh!",
+      pictureUrl,
+      country: 'US',
+      diet: 'omnivore',
+      rememberMe: true,
+    })
+  );
 });

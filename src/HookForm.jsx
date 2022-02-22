@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import './Form.css';
 
-
-export default function Form({ onSubmit }) {
+export default function HookForm({ onSubmit }) {
   const { register, handleSubmit } = useForm();
 
   return (
@@ -122,6 +121,7 @@ export default function Form({ onSubmit }) {
       </div>
 
       <button type="submit">Send</button>
+      <button type="button" onClick={onSubmit}>Fake send</button>
     </form>
   );
 }
