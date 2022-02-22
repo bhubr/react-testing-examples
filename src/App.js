@@ -1,11 +1,11 @@
-import Form from './Form';
+import HookForm from './HookForm';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <h1>Testing forms</h1>
-      <Form onSubmit={console.log} />
+      <HookForm onSubmit={(data) => console.log('data from form', data)} />
     </div>
   );
 }
