@@ -21,6 +21,9 @@ export default function Form({ onSubmit }) {
 
   const handleChange = ({ target: { name, value } }) =>
     setData((prev) => ({ ...prev, [name]: value }));
+
+  const handleChangeCheckbox = ({ target: { name, checked } }) =>
+    setData((prev) => ({ ...prev, [name]: checked }));
   return (
     <form className="Form" onSubmit={handleSubmit}>
       <div className="Form-control">
@@ -103,22 +106,45 @@ export default function Form({ onSubmit }) {
       <div className="Form-control">
         <p className="Form-radioGroupHeader">Diet</p>
         <label htmlFor="omnivore">
-          <input type="radio" name="diet" id="omnivore" value="omnivore" />
+          <input
+            type="radio"
+            name="diet"
+            id="omnivore"
+            value="omnivore"
+            onChange={handleChange}
+          />
           Omnivore
         </label>
         <label htmlFor="vegetarian">
-          <input type="radio" name="diet" id="vegetarian" value="vegetarian" />
+          <input
+            type="radio"
+            name="diet"
+            id="vegetarian"
+            value="vegetarian"
+            onChange={handleChange}
+          />
           Vegetarian
         </label>
         <label htmlFor="vegan">
-          <input type="radio" name="diet" id="vegan" value="vegan" />
+          <input
+            type="radio"
+            name="diet"
+            id="vegan"
+            value="vegan"
+            onChange={handleChange}
+          />
           Vegan
         </label>
       </div>
 
       <div className="Form-control">
         <label htmlFor="rememberMe">
-          <input type="checkbox" name="rememberMe" id="rememberMe" />
+          <input
+            type="checkbox"
+            name="rememberMe"
+            id="rememberMe"
+            onChange={handleChangeCheckbox}
+          />
           Remember me
         </label>
       </div>

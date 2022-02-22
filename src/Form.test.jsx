@@ -48,5 +48,7 @@ test('Form can be submitted', () => {
     bio: "D'oh!",
     pictureUrl,
     country: 'US',
+    diet: 'omnivore',
+    rememberMe: true,
   });
 });
