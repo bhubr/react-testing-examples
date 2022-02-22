@@ -10,14 +10,14 @@
   margin: 1.5em 0;
 }
 
-.Form-control input[type="email"],
-.Form-control input[type="password"],
-.Form-control input[type="url"],
+.Form-control input[type='email'],
+.Form-control input[type='password'],
+.Form-control input[type='url'],
 .Form-control textarea,
 .Form-control select {
   display: block;
 }
 
 .Form-radioGroupHeader {
-  margin: .5em 0 .25em 0;
+  margin: 0.5em 0 0.25em 0;
 }

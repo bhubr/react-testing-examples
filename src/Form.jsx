@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "./Form.css"
+import './Form.css';
 
 const initialFormState = {
   email: '',
@@ -8,53 +8,85 @@ const initialFormState = {
   country: '',
   diet: '',
   rememberMe: false,
-}
+};
 
 export default function Form({ onSubmit }) {
-  const [data, setData] = useState(initialFormState)
+  const [data, setData] = useState(initialFormState);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onSubmit(data)
-    setData({ ...initialFormState })
-  }
+    e.preventDefault();
+    onSubmit(data);
+    setData({ ...initialFormState });
+  };
 
-  const handleChange = (key) => ({ target }) => setData(prev => ({ ...prev, [key]: target.value }))
+  const handleChange = ({ target: { name, value } }) =>
+    setData((prev) => ({ ...prev, [name]: value }));
   return (
     <form className="Form" onSubmit={handleSubmit}>
-
       <div className="Form-control">
-        <label htmlFor="email" required>
+        <label htmlFor="email">
           Email (*)
-          <input id="email" type="email" value={data.email} onChange={handleChange('email')} />
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value={data.email}
+            onChange={handleChange}
+            required
+          />
         </label>
       </div>
 
       <div className="Form-control">
-        <label htmlFor="password" required>
+        <label htmlFor="password">
           Password (*)
-          <input id="password" type="password" value={data.password} onChange={handleChange('password')} />
+          <input
+            id="password"
+            type="password"
+            name="password"
+            value={data.password}
+            onChange={handleChange}
+            required
+          />
         </label>
       </div>
 
       <div className="Form-control">
         <label htmlFor="pictureUrl">
           Profile picture URL
-          <input id="pictureUrl" type="url" value={data.pictureUrl} onChange={handleChange('pictureUrl')} />
+          <input
+            id="pictureUrl"
+            type="url"
+            name="pictureUrl"
+            value={data.pictureUrl}
+            onChange={handleChange}
+          />
         </label>
       </div>
 
       <div className="Form-control">
         <label htmlFor="bio">
           Short biography
-          <textarea id="bio" rows="4" value={data.bio} onChange={handleChange('bio')} />
+          <textarea
+            id="bio"
+            rows="4"
+            name="bio"
+            value={data.bio}
+            onChange={handleChange}
+          />
         </label>
       </div>
 
       <div className="Form-control">
         <label htmlFor="country">
           Country (*)
-          <select id="country" value={data.country} onChange={handleChange('country')} required>
+          <select
+            id="country"
+            name="country"
+            value={data.country}
+            onChange={handleChange}
+            required
+          >
             <option value="">&mdash;</option>
             <option value="FR">France</option>
             <option value="DE">Germany</option>
@@ -63,6 +95,7 @@ export default function Form({ onSubmit }) {
             <option value="IT">Italy</option>
             <option value="BE">Belgium</option>
             <option value="CH">Switzerland</option>
+            <option value="US">United States</option>
           </select>
         </label>
       </div>
@@ -91,7 +124,6 @@ export default function Form({ onSubmit }) {
       </div>
 
       <button type="submit">Send</button>
-
     </form>
-  )
+  );
 }
